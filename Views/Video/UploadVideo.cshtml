@@ -1,0 +1,48 @@
+@using dat_q_ngo.Models;
+@using dat_q_ngo.ViewModels;
+@inject SignInManager<ApplicationUserModel> SignInManager
+@inject UserManager<ApplicationUserModel> UserManager
+@using Microsoft.AspNetCore.Identity;
+@model dat_q_ngo.ViewModels.VideoListViewModel;
+
+@{
+    Layout="../Shared/_Layout.cshtml";
+    //TODO: assing lists of videos (names) to a placeholder
+    //list of videos belonged to user is empty
+    //var context = new ApplicationDbContext();
+    List<VideoModel> video_list = null;
+}
+
+@if(SignInManager.IsSignedIn(User))
+{
+    @if(video_list == null || video_list.Count() == 0)
+    {
+        <div style="display:inline-block;">
+            <h4>Your video library is empty</h4> 
+            <partial name="_UploadVideo"/>
+        </div>
+        <hr />
+    }
+    else
+    {
+        <div style="display:inline-block;">
+            <h4>Upload your videos and start earning thumb ups</h4> 
+            <partial name="_UploadVideo"/>
+        </div>
+        <hr />
+        foreach (var a_video in video_list)
+        {
+        // <p>Title: @a_video.Title</p>
+            //<p>Upload Date: @a_video.Time</p>
+            //<p>Thumb Ups: @a_video.ThumbUpCounts</p>
+        }
+    }
+}
+else
+{
+    <h3>Logs in or creates your account and starts uploading videos and sharing to your friends</h3>
+    <div>
+        <a class="btn btn-primary" id = "register" asp-controller="Account" asp-action="Register">Register</a>
+        <a class="btn btn-primary" id = "login" asp-controller="Account" asp-action="LogIn">Login</a>
+    </div>
+}
