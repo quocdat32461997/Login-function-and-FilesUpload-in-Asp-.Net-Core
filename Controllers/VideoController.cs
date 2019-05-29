@@ -35,6 +35,22 @@ namespace dat_q_ngo.Controllers
                 _dbcontext = dbcontext;
             }
 
+        [HttpGet]
+        public async Task<IActionResult> GetVideo(string fileName)
+        {
+            if (fileName == null)  
+                return Content("filename not present");  
+  
+            var path = Path.Combine(  
+                            Directory.GetCurrentDirectory(),  
+                            "MyStaticFiles", fileName);  
+
+           // var stream = new FileStream(path, FileMode.Open); 
+              
+            //await stream.CopyToAsync(memory);  
+            //memory.Position = 0;  
+            return View(); 
+        }
 
         [HttpGet]
         public async Task<IActionResult> UploadVideo()

@@ -105,7 +105,7 @@ namespace dat_q_ngo
             {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
-                RequestPath = "/StaticFiles"
+                RequestPath = "/Video"
             });
 
             app.UseMvc(routes =>
