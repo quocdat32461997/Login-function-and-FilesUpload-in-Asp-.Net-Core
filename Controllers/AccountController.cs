@@ -69,6 +69,7 @@ namespace dat_q_ngo.Controllers
                     UserName = model.Email,
                     Name = model.Name, 
                     Email = model.Email,
+                    Videos = null
                     //Password = model.Password
                 };
                 Console.WriteLine(user.UserName);

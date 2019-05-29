@@ -16,8 +16,10 @@ namespace dat_q_ngo.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string ID {get; set;}
 
-        public string Title {get; set;}
+        [ForeignKey("ApplicationUserModel")]
+        public string UserName {get; set;}
 
+        public string Title {get; set;}
 
         //Genereated by database
         public DateTime UploadTime {get; set;}
@@ -25,6 +27,8 @@ namespace dat_q_ngo.Models
         public string Genre {get; set;}
 
         public int ThumbUpCounts {get; set;}
+
+        public string FileName {get; set;}
 
         public string FilePath {get; set;}//videos saved to this filepath
     }

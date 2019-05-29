@@ -185,6 +185,10 @@ namespace dat_q_ngo.Migrations
                     b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserModelId");
+
+                    b.Property<string>("FileName");
+
                     b.Property<string>("FilePath");
 
                     b.Property<string>("Genre");
@@ -195,7 +199,11 @@ namespace dat_q_ngo.Migrations
 
                     b.Property<DateTime>("UploadTime");
 
+                    b.Property<string>("UserName");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("ApplicationUserModelId");
 
                     b.ToTable("Videos");
                 });
@@ -243,6 +251,13 @@ namespace dat_q_ngo.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("dat_q_ngo.Models.VideoModel", b =>
+                {
+                    b.HasOne("dat_q_ngo.Models.ApplicationUserModel")
+                        .WithMany("Videos")
+                        .HasForeignKey("ApplicationUserModelId");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,16 +3,17 @@
 @inject SignInManager<ApplicationUserModel> SignInManager
 @inject UserManager<ApplicationUserModel> UserManager
 @using Microsoft.AspNetCore.Identity;
-@model dat_q_ngo.ViewModels.VideoListViewModel;
+@using Microsoft.AspNetCore.Http;
 
 @{
     Layout="../Shared/_Layout.cshtml";
     //TODO: assing lists of videos (names) to a placeholder
     //list of videos belonged to user is empty
     //var context = new ApplicationDbContext();
-    List<VideoModel> video_list = null;
+    //TODO: add context here and get the videos
+    List<VideoModel> video_list = ViewData["VideoList"] as List<VideoModel>;
+    
 }
-
 @if(SignInManager.IsSignedIn(User))
 {
     @if(video_list == null || video_list.Count() == 0)
@@ -22,6 +23,20 @@
             <partial name="_UploadVideo"/>
         </div>
         <hr />
+        List<VideoModel> list = ViewData["VideoList"] as List<VideoModel>;
+        <ul>
+            @foreach (var video in ViewData["VideoList"] as IList<VideoModel>)
+            {
+                ViewBag.Source = "~/StaticFiles/" + @video.FileName;
+                <li>
+                   <a href="@video.FilePath">@video.FileName</a>
+                   <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive-item" src=URL ></iframe>
+                    </div>
+                   
+                </li>
+            }
+        </ul>
     }
     else
     {
@@ -30,12 +45,21 @@
             <partial name="_UploadVideo"/>
         </div>
         <hr />
-        foreach (var a_video in video_list)
-        {
-        // <p>Title: @a_video.Title</p>
-            //<p>Upload Date: @a_video.Time</p>
-            //<p>Thumb Ups: @a_video.ThumbUpCounts</p>
-        }
+        List<VideoModel> list = ViewData["VideoList"] as List<VideoModel>;
+        <ul>
+            @foreach (var video in ViewData["VideoList"] as IList<VideoModel>)
+            {
+                ViewBag.Source = "/MyStaticFiles/" + @video.FileName;
+                var Path = "MyStaticFiles/" + @video.FileName; 
+                <li>
+                   <a href="video.FilePat">@video.FilePath</a>
+                   <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive-item" src="~/MyStaticFiles/IMG_0172.mov" ></iframe>
+                    </div>
+                   
+                </li>
+            }
+        </ul>
     }
 }
 else
